@@ -10,7 +10,11 @@ NB_MAX_COUP = 10
 COMBINAISON_SECRETE = [] #servia à stocker la combinaison recherchée par l'algo
 HISTORIQUE = [] #tableau qui stocke l'ensemble des coups joués. L'indice 0 sera la première combinaison de 4 couleurs, etc..
 
-# Les fonctions
+''' # Les fonctions # '''
+
+#####################
+###### Etape 1 ######
+#####################
 
 def genere_combinaison_secrete(): #fonction qui génère une combinaison secrete
     combinaison = []
@@ -70,7 +74,7 @@ def eval(candidat, candidat_precedent):
     virtuel_pc, virtuel_mc = compare(candidat, candidat_precedent)
     virtuel_score = score(virtuel_pc, virtuel_mc)
 
-    return abs(virtuel_score - candidat_precedent_score)
+    return abs(virtuel_score - candidat_precedent_score) #-> vers 0 si le candidat ressemble beaucoup au secret
 
 def Fitness(candidat):
     eval_moyenne = 0
@@ -80,26 +84,36 @@ def Fitness(candidat):
 
     return eval_moyenne/len(HISTORIQUE)
 
+#####################
+###### Etape 2 ######
+#####################
 
 
 
-# Le main
+''' # Le main # '''
 
 if __name__ == "__main__":
-    COMBINAISON_SECRETE = genere_combinaison_secrete()
-    #COMBINAISON_SECRETE = ['Bleu', 'Bleu', 'Rose', 'Bleu']
+    #COMBINAISON_SECRETE = genere_combinaison_secrete()
+    COMBINAISON_SECRETE = ['Bleu', 'Bleu', 'Rose', 'Bleu']
     print("combinaison : ", COMBINAISON_SECRETE)
+
+    candidat_precedent = ['Rouge', 'Violet', 'Blanc', 'Vert']
+
+    candidat2 = ['Blanc', 'Rouge', 'Bleu', 'Jaune']
+
+    HISTORIQUE = [candidat_precedent, candidat2]
+    #print("historique : ", HISTORIQUE)
 
     candidat = ['Rouge', 'Rouge', 'Bleu', 'Vert']
     print("candidat : ", candidat)
-    print(compare(COMBINAISON_SECRETE, candidat))
-
-    candidat_precedent = ['Rouge', 'Violet', 'Blanc', 'Vert']
-    evaluation = eval(candidat, candidat_precedent)
+    #print(compare(COMBINAISON_SECRETE, candidat))
+    evaluation = eval(candidat, candidat)
     print("eval : ", evaluation)
+    pc1, mc1 = compare(COMBINAISON_SECRETE, candidat_precedent)
+    print("score de candidat_precedent : ", score(pc1, mc1))
+    pc2, mc2 = compare(COMBINAISON_SECRETE, candidat)
+    print("score de candidat : ", score(pc2, mc2))
+    pc3, mc3 = compare(candidat, candidat)
+    print("score virtuel de candidat : ", score(pc3, mc3))
 
-    HISTORIQUE = [candidat_precedent, candidat]
-    print("historique : ", HISTORIQUE)
-    candidat2 = ['Blanc', 'Rouge', 'Bleu', 'Jaune']
-
-    print("Fitness : ", Fitness(candidat2))
+    print("Fitness : ", Fitness(candidat))
