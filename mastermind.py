@@ -58,7 +58,7 @@ def score(pc,mc):
     elif pc==0 and mc==0:
         return 0
     else:
-        return 10*pc+mc
+        return 3*pc+mc
 
 def eval(candidat, candidat_precedent):
 
