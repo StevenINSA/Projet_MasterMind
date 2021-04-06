@@ -21,8 +21,8 @@ def genere_combinaison_secrete(): #fonction qui génère une combinaison secrete
     return combinaison
 
 def compare(combinaison1, combinaison2):
-#cette fonction servira à comparer deux combinaison entre elles.
-#elle retournera le nombre de pion bien placés et le nombre de pion mal placés mais de la bonne couleur
+#cette fonction servira à comparer deux combinaison entre elles. Elle retourne le nombre de couleurs de c2 bien placées dans c1
+#elle renverra ainsi le nombre de pion bien placés (pc) et le nombre de pion mal placés mais de la bonne couleur (mc)
 
     pc = 0 #nombre de couleur correctement placées
     mc = 0 #nombre de couleur présentes mais mal placées
