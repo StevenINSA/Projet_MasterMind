@@ -88,6 +88,24 @@ def Fitness(candidat):
 ###### Etape 2 ######
 #####################
 
+def mutate(candidat):
+
+    #On génère deux nombres aléatoires afin de choisir l'indice et la couleur à changer
+    random_color_index = randint(0, 7)
+    random_color = COULEURS[random_color_index]
+    random_index = randint(0, 3)
+
+    #On a 1/8 de chance dans cet exercice de retomber sur la même couleur, ce qui annule la mutation
+    #On tâchera donc de vérifier que la mutation donne bien une nouvelle solution candidate
+    while random_color == candidat[random_index]:
+        random_color_index = randint(0, 7)
+        random_index = COULEURS[random_color_index]
+
+    #creation de la solution mutante
+    candidat[random_index] = random_color
+
+    return candidat
+
 
 
 ''' # Le main # '''
@@ -107,6 +125,8 @@ if __name__ == "__main__":
     candidat = ['Rouge', 'Rouge', 'Bleu', 'Vert']
     print("candidat : ", candidat)
     #print(compare(COMBINAISON_SECRETE, candidat))
+    mutate(candidat)
+    print("candidat : ", candidat)
     evaluation = eval(candidat, candidat)
     print("eval : ", evaluation)
     pc1, mc1 = compare(COMBINAISON_SECRETE, candidat_precedent)
